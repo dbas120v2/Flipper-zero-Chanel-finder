@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0a6c8c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Channel Finder">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAADyklEQVR4Xu3dQW6bYBSF0bTqKOMss8ok20gmWWcW0QGSZTUBc7H5eQ+do44aqDG8ftiOjX89/31/oryvj9dpG1/ePodt7O9ht8RDXKZkAMPRw3Uwhs2H4Rjt6+N1+pPe8MgTysRwDHU9E/fMx4Z1NzAcQ728fR5ygtjGcBzgnvm4rDsgHobjGNcJGXCYtzEcR9qWgW1rbWA4DjbsSG9gOArZcH7ZsMp6huN4G17A2LDKBoajhJonF8NRTnqmSJdf78/6RVn230FKy//y9hkd5nT5DQzHA/x4UKe/TEekFKeVey3/d09jMG1NtNZ+DMdd1hzFNcvUZDi2W3/U1y8Z2fs5juGoZe/jHTEcG6UxSJevwHAwy3BgOMgpB8rxaOlLn+nyFSgHyrGD9TFYv2QpfvF2lzW/Gk0nI11+P04r96pzLB/OcDS290fvnVYa2ztayoFnK+SUA+UgpxwoBznlQDnIKQfKQU45UA5yyoFykFMOlIOccqAc5JQD5SCnHCgHOeVAOcgpB8pBTjlQDnLKwaxfz3/f2+2ejhd87fgNCp2Go+lMfLf3pRMepc1p5TSTUecbM25qUI4zjcV/iiekejlOPBn1E1J9ODhQ6eE4dzYmle9j3eGovNceq+w9rTscHM5wMKvocJQt7U5q3t+iw0EFhoNupxUqUA5mtb8wfuVfT9R8mLle73JUnozpDRzFt3BZ4+Host+7bOd3XYej1x7vtbUXXYeDAQwHXucgpxwoBznlQDnIKQfKQU45UA5yyoFykFMOlIOccqAc5JSD05Wj1xu7e23thXJwunIUv+zJtabZeHpqXo7i+/3r47X4Fi5r/4m31nu/OI85OONjDvamHCgHOeVAOcgpB8pBTjlQDnLKgXKQUw6Ug5xyMKv9+zmuXV/Rcf37PEau1UvRrw5df2gncxf6XP53Rq5109zGHOgMp5WF3VrkR02dYTjYSfvhuFnjHxcYuVZf7YeD/RgOZhkOzjscN5/0/rjAyLX6Ug7OW47lD80uFGLkj5o6ySukk5EvhG+7rQU3n12Pd6rhaK3gcHjMwakfc7AT5UA5yCkHykFOOVAOcsqBcpBTDpSDnHKgHOSUg27lKPjmhl3VvL/KQbdyUEHdctQs7R7K3tO6w7FwYYUzKTsZ7b+pqbvKk9FgOIrvvnvUv2tFP5rw3c0PMPZSfzIalOOixd5cqct9aVOOa00r0mUmLloOB2OUfirLsQwHswwHhoOccqAc5JQD5SCnHCgHOeVAOcgpB8pBTjlQDnLKgXKQUw6Ug5xyoBzklINZ/wBYign6scqYywAAAABJRU5ErkJggg==">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAADyklEQVR4Xu3dQW6bYBSF0bTqKOMss8ok20gmWWcW0QGSZTUBc7H5eQ+do44aqDG8ftiOjX89/31/oryvj9dpG1/ePodt7O9ht8RDXKZkAMPRw3Uwhs2H4Rjt6+N1+pPe8MgTysRwDHU9E/fMx4Z1NzAcQ728fR5ygtjGcBzgnvm4rDsgHobjGNcJGXCYtzEcR9qWgW1rbWA4DjbsSG9gOArZcH7ZsMp6huN4G17A2LDKBoajhJonF8NRTnqmSJdf78/6RVn230FKy//y9hkd5nT5DQzHA/x4UKe/TEekFKeVey3/d09jMG1NtNZ+DMdd1hzFNcvUZDi2W3/U1y8Z2fs5juGoZe/jHTEcG6UxSJevwHAwy3BgOMgpB8rxaOlLn+nyFSgHyrGD9TFYv2QpfvF2lzW/Gk0nI11+P04r96pzLB/OcDS290fvnVYa2ztayoFnK+SUA+UgpxwoBznlQDnIKQfKQU45UA5yyoFykFMOlIOccqAc5JQD5SCnHCgHOeVAOcgpB8pBTjlQDnLKwaxfz3/f2+2ejhd87fgNCp2Go+lMfLf3pRMepc1p5TSTUecbM25qUI4zjcV/iiekejlOPBn1E1J9ODhQ6eE4dzYmle9j3eGovNceq+w9rTscHM5wMKvocJQt7U5q3t+iw0EFhoNupxUqUA5mtb8wfuVfT9R8mLle73JUnozpDRzFt3BZ4+Host+7bOd3XYej1x7vtbUXXYeDAQwHXucgpxwoBznlQDnIKQfKQU45UA5yyoFykFMOlIOccqAc5JSD05Wj1xu7e23thXJwunIUv+zJtabZeHpqXo7i+/3r47X4Fi5r/4m31nu/OI85OONjDvamHCgHOeVAOcgpB8pBTjlQDnLKgXKQUw6Ug5xyMKv9+zmuXV/Rcf37PEau1UvRrw5df2gncxf6XP53Rq5109zGHOgMp5WF3VrkR02dYTjYSfvhuFnjHxcYuVZf7YeD/RgOZhkOzjscN5/0/rjAyLX6Ug7OW47lD80uFGLkj5o6ySukk5EvhG+7rQU3n12Pd6rhaK3gcHjMwakfc7AT5UA5yCkHykFOOVAOcsqBcpBTDpSDnHKgHOSUg27lKPjmhl3VvL/KQbdyUEHdctQs7R7K3tO6w7FwYYUzKTsZ7b+pqbvKk9FgOIrvvnvUv2tFP5rw3c0PMPZSfzIalOOixd5cqct9aVOOa00r0mUmLloOB2OUfirLsQwHswwHhoOccqAc5JQD5SCnHCgHOeVAOcgpB8pBTjlQDnLKgXKQUw6Ug5xyoBzklINZ/wBYign6scqYywAAAABJRU5ErkJggg==">
+<title>FRS/GMRS Channel Finder</title>
+<style>
+[hidden] { display: none !important; }
+body { margin: 0; }
+/* Layout: one-column phone tool. Mode switch, frequency readout, photo, verdict card, then the lists for the active mode. */
+:root {
+  --bg: #e9eef1;
+  --surface: #f6f9fa;
+  --ink: #12202b;
+  --muted: #5a6b78;
+  --line: #cbd6dc;
+  --accent: #0a6c8c;
+  --accent-ink: #ffffff;
+  --good: #1c7a46;
+  --warn: #a86400;
+  --bad: #b23a30;
+  --hit: #d7ecf3;
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-body: "Barlow", system-ui, sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171d; --surface: #17222a; --ink: #e5edf1; --muted: #92a4b0; --line: #2b3b46;
+    --accent: #4cc0e0; --accent-ink: #08212b; --good: #5fd08c; --warn: #f0b04a; --bad: #f2877d; --hit: #1d3a46;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171d; --surface: #17222a; --ink: #e5edf1; --muted: #92a4b0; --line: #2b3b46;
+  --accent: #4cc0e0; --accent-ink: #08212b; --good: #5fd08c; --warn: #f0b04a; --bad: #f2877d; --hit: #1d3a46;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.45;
+  padding-block: 20px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: 1.9rem; letter-spacing: 0.02em; margin: 0; text-wrap: balance; line-height: 1.1; }
+.sub { margin: 4px 0 0; color: var(--muted); font-size: 0.95rem; max-width: 46ch; }
+label.cap { display: block; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 6px; }
+.seg { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; padding: 3px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; }
+.seg button { font: inherit; font-weight: 600; min-height: 44px; padding: 8px; border: 0; border-radius: 7px; background: transparent; color: var(--muted); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.input-row { display: flex; align-items: baseline; gap: 10px; background: var(--surface); border: 2px solid var(--line); border-radius: 10px; padding: 10px 14px; }
+.input-row:focus-within { border-color: var(--accent); }
+#freq { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--ink); font-family: var(--font-data); font-size: 2rem; font-weight: 500; padding: 0; outline: none; }
+.unit { font-family: var(--font-data); color: var(--muted); font-size: 1rem; }
+.read-as { margin: 6px 0 0; font-family: var(--font-data); font-size: 0.8rem; color: var(--muted); min-height: 1.2em; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; align-items: center; }
+.chips span.t { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-right: 2px; }
+button.chip { font-family: var(--font-data); font-size: 0.85rem; background: transparent; color: var(--accent); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+button.chip:hover { border-color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.verdict { display: flex; gap: 16px; align-items: center; }
+.num { font-family: var(--font-display); font-weight: 700; font-size: 4.6rem; line-height: 0.9; min-width: 1.6ch; text-align: center; font-variant-numeric: tabular-nums; }
+.num.small { font-size: 2.2rem; }
+.vtext { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.badge { align-self: flex-start; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; padding: 3px 9px; border-radius: 4px; border: 1px solid currentColor; }
+.badge.good { color: var(--good); } .badge.warn { color: var(--warn); } .badge.bad { color: var(--bad); }
+.vtitle { font-weight: 600; font-size: 1.1rem; overflow-wrap: anywhere; }
+.facts { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; margin: 0; font-size: 0.92rem; }
+.facts dt { color: var(--muted); }
+.facts dd { margin: 0; font-size: 0.92rem; min-width: 0; overflow-wrap: anywhere; }
+.facts dd.mono { font-family: var(--font-data); font-size: 0.88rem; }
+.note { margin: 0; font-size: 0.92rem; }
+.flip { border-left: 3px solid var(--warn); padding-left: 12px; color: var(--ink); }
+.hint { border-left: 3px solid var(--accent); padding-left: 12px; }
+h2 { font-family: var(--font-display); font-size: 1.3rem; letter-spacing: 0.04em; text-transform: uppercase; margin: 0; }
+.tbl { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.grp { padding: 8px 14px; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 600; background: var(--bg); border-top: 1px solid var(--line); }
+.grp:first-child { border-top: 0; }
+button.row { display: grid; grid-template-columns: 3.2ch 1fr auto; gap: 12px; align-items: baseline; width: 100%; text-align: left; background: transparent; color: var(--ink); border: 0; border-top: 1px solid var(--line); padding: 9px 14px; cursor: pointer; font: inherit; }
+.grp + button.row { border-top: 0; }
+button.row:hover { background: var(--bg); }
+button.row.hit { background: var(--hit); }
+.row .c { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; font-variant-numeric: tabular-nums; }
+.row .f { font-family: var(--font-data); font-size: 0.95rem; font-variant-numeric: tabular-nums; }
+.row .p { font-size: 0.8rem; color: var(--muted); text-align: right; }
+.types { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.types .tl { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-right: 2px; }
+.pill { font-family: var(--font-data); font-weight: 600; font-size: 0.9rem; padding: 4px 14px; border-radius: 6px; border: 1.5px solid var(--line); }
+.pill.on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.pill.off { color: var(--muted); text-decoration: line-through; opacity: 0.75; }
+.types .tn { font-size: 0.9rem; color: var(--muted); }
+button.row.band { grid-template-columns: 1fr auto; }
+.row .bn { font-size: 0.95rem; min-width: 0; overflow-wrap: anywhere; }
+.row .mono { font-family: var(--font-data); }
+.also-h { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.entry { border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 2px; }
+.entry-top { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
+.entry-name { font-weight: 600; min-width: 0; overflow-wrap: anywhere; }
+.tag { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; }
+.entry-meta { font-family: var(--font-data); font-size: 0.82rem; color: var(--muted); }
+.entry-note { font-size: 0.9rem; }
+.add-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.field { font: inherit; background: var(--surface); color: var(--ink); border: 1.5px solid var(--line); border-radius: 8px; padding: 9px 12px; min-width: 0; flex: 1 1 140px; }
+.field:focus { outline: none; border-color: var(--accent); }
+.mine-item { display: grid; grid-template-columns: 1fr auto; align-items: center; border-top: 1px solid var(--line); }
+.mine-item:first-child { border-top: 0; }
+.mine-item button.row { border-top: 0; }
+.mine-item .btn.del { margin-right: 10px; padding: 6px 10px; font-size: 0.8rem; }
+.vh { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+.photo-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn { font: inherit; font-weight: 600; font-size: 0.95rem; padding: 10px 16px; border-radius: 8px; border: 1.5px solid var(--accent); background: var(--accent); color: var(--accent-ink); cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn:disabled { opacity: 0.5; cursor: default; }
+.vh:focus-visible + label.btn { outline: 3px solid var(--accent); outline-offset: 2px; }
+.photo-out { display: flex; gap: 12px; align-items: flex-start; margin-top: 12px; }
+.photo-out button.thumbbtn { padding: 0; border: 0; background: none; cursor: zoom-in; flex: none; }
+.photo-out img { width: 96px; height: 72px; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); display: block; }
+.po-text { min-width: 0; display: flex; flex-direction: column; gap: 8px; font-size: 0.92rem; }
+.po-text p { margin: 0; }
+#zoom { position: fixed; inset: 0; z-index: 50; background: rgba(0, 0, 0, 0.88); display: flex; flex-direction: column; }
+#zoom .zbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; color: #fff; font-size: 0.9rem;
+  padding: 10px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px)); padding-top: calc(10px + env(safe-area-inset-top, 0px)); }
+#zoom .zbox { flex: 1; overflow: auto; touch-action: pan-x pan-y pinch-zoom; padding-bottom: env(safe-area-inset-bottom, 0px); }
+#zoom img { width: max(100vw, 900px); max-width: none; display: block; }
+.foot { font-size: 0.82rem; color: var(--muted); margin: 0; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+
+<main class="wrap">
+  <header>
+    <h1>FRS/GMRS Channel Finder</h1>
+    <p class="sub">Look up a walkie-talkie channel, or find out what else uses a frequency. Type it in or use a photo of your Flipper screen.</p>
+  </header>
+
+  <div class="seg" role="group" aria-label="Mode">
+    <button type="button" id="modeW" aria-pressed="true">Walkie-talkie</button>
+    <button type="button" id="modeO" aria-pressed="false">Other frequencies</button>
+  </div>
+
+  <section>
+    <label class="cap" for="freq">Frequency</label>
+    <div class="input-row">
+      <input id="freq" type="text" inputmode="decimal" autocomplete="off" autocapitalize="off" spellcheck="false" value="462.560" aria-describedby="readas">
+      <span class="unit">MHz</span>
+    </div>
+    <p class="read-as" id="readas"></p>
+    <div class="chips" id="chipsW">
+      <span class="t">Try</span>
+      <button class="chip" type="button" data-f="462.6125">462.6125</button>
+      <button class="chip" type="button" data-f="467.7125">467.7125</button>
+      <button class="chip" type="button" data-f="462.7">462.7</button>
+      <button class="chip" type="button" data-f="151.94">151.94</button>
+    </div>
+    <div class="chips" id="chipsO" hidden>
+      <span class="t">Try</span>
+      <button class="chip" type="button" data-f="433.92">433.92</button>
+      <button class="chip" type="button" data-f="315">315</button>
+      <button class="chip" type="button" data-f="908.42">908.42</button>
+      <button class="chip" type="button" data-f="890">890</button>
+      <button class="chip" type="button" data-f="162.55">162.55</button>
+    </div>
+  </section>
+
+  <section id="photo">
+    <label class="cap" for="shot">Photo of your Flipper screen</label>
+    <div class="photo-row">
+      <input id="shot" class="vh" type="file" accept="image/*">
+      <label class="btn ghost" for="shot">Choose or take a photo</label>
+      <button class="btn" id="readBtn" type="button" disabled hidden>Read it</button>
+      <button class="btn ghost" id="stopBtn" type="button" hidden>Stop</button>
+    </div>
+    <div class="photo-out" id="photoOut" hidden>
+      <button class="thumbbtn" id="thumbBtn" type="button" aria-label="Enlarge photo"><img id="thumb" alt="Your photo"></button>
+      <div class="po-text" id="poText" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="card" id="result" aria-live="polite"></section>
+
+  <section id="secW">
+    <h2>All channels</h2>
+    <p class="foot" style="margin:4px 0 10px">Tap a row to look it up. The box above starts with an example reading, 462.560.</p>
+    <div class="tbl" id="table"></div>
+  </section>
+
+  <section id="secO" hidden>
+    <h2>What uses what</h2>
+    <p class="foot" style="margin:4px 0 10px">Search by name, such as pager, garage, LTE800 or weather. Tap a row to look up its frequency.</p>
+    <input id="q" class="field" type="search" autocomplete="off" placeholder="Search names" aria-label="Search names" style="width:100%;margin-bottom:10px">
+    <div class="tbl" id="bands"></div>
+  </section>
+
+  <section>
+    <h2>The sheet</h2>
+    <p class="foot" style="margin:4px 0 10px">Every channel and band on this page comes from one table that lives in this file. Export it, edit it in a spreadsheet app, and import it back. Add your own frequencies and they show up in results. Saved on this device.</p>
+    <div class="add-row">
+      <input id="addF" class="field" type="text" inputmode="decimal" autocomplete="off" placeholder="462.6125 or 433.05-434.79" aria-label="Frequency in MHz">
+      <input id="addN" class="field" type="text" autocomplete="off" placeholder="Name" aria-label="Name">
+      <button class="btn" id="addBtn" type="button">Add</button>
+    </div>
+    <div class="photo-row" style="margin-bottom:10px">
+      <input id="impFile" class="vh" type="file" accept=".csv,text/csv,text/plain">
+      <label class="btn ghost" for="impFile">Import CSV</label>
+      <button class="btn ghost" id="expBtn" type="button">Export CSV</button>
+      <button class="btn ghost" id="resetBtn" type="button">Reset</button>
+    </div>
+    <p class="foot" id="mineMsg" aria-live="polite" style="min-height:1.2em;margin:0 0 10px"></p>
+    <h2 style="font-size:1.05rem">Your additions</h2>
+    <div class="tbl" id="mineList" style="margin-top:8px"></div>
+  </section>
+
+  <p class="foot">FRS needs no license in the US. GMRS does. Power limits are the FCC ERP maximums for handhelds and mobiles. Frequencies off by a few kHz usually come from receiver drift or rounding, not a different channel. The Flipper labels bands using world-wide plans, so a label such as GSM900 can sit on something different in the US. The list above is a guide for the US and is not a full allocation chart.</p>
+</main>
+
+<div id="zoom" hidden>
+  <div class="zbar"><span>Pinch to zoom, drag to move.</span><button class="btn" id="zoomClose" type="button">Close</button></div>
+  <div class="zbox"><img id="zimg" alt="Your photo, enlarged"></div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var KEY = "freq-sheet-v3", MODEKEY = "finder-mode";
+  var DEFAULT_CSV = "mhz,name,type,note\n462.5625,Channel 1,FRS+GMRS,2 W FRS / 5 W GMRS\n462.5875,Channel 2,FRS+GMRS,2 W FRS / 5 W GMRS\n462.6125,Channel 3,FRS+GMRS,2 W FRS / 5 W GMRS\n462.6375,Channel 4,FRS+GMRS,2 W FRS / 5 W GMRS\n462.6625,Channel 5,FRS+GMRS,2 W FRS / 5 W GMRS\n462.6875,Channel 6,FRS+GMRS,2 W FRS / 5 W GMRS\n462.7125,Channel 7,FRS+GMRS,2 W FRS / 5 W GMRS\n467.5625,Channel 8,FRS+GMRS,\"0.5 W on both, handhelds only\"\n467.5875,Channel 9,FRS+GMRS,\"0.5 W on both, handhelds only\"\n467.6125,Channel 10,FRS+GMRS,\"0.5 W on both, handhelds only\"\n467.6375,Channel 11,FRS+GMRS,\"0.5 W on both, handhelds only\"\n467.6625,Channel 12,FRS+GMRS,\"0.5 W on both, handhelds only\"\n467.6875,Channel 13,FRS+GMRS,\"0.5 W on both, handhelds only\"\n467.7125,Channel 14,FRS+GMRS,\"0.5 W on both, handhelds only\"\n462.5500,Channel 15,FRS+GMRS,2 W FRS / 50 W GMRS; also GMRS repeater output\n462.5750,Channel 16,FRS+GMRS,2 W FRS / 50 W GMRS; also GMRS repeater output\n462.6000,Channel 17,FRS+GMRS,2 W FRS / 50 W GMRS; also GMRS repeater output\n462.6250,Channel 18,FRS+GMRS,2 W FRS / 50 W GMRS; also GMRS repeater output\n462.6500,Channel 19,FRS+GMRS,2 W FRS / 50 W GMRS; also GMRS repeater output\n462.6750,Channel 20,FRS+GMRS,2 W FRS / 50 W GMRS; also GMRS repeater output\n462.7000,Channel 21,FRS+GMRS,2 W FRS / 50 W GMRS; also GMRS repeater output\n462.7250,Channel 22,FRS+GMRS,2 W FRS / 50 W GMRS; also GMRS repeater output\n467.5500,Channel 23,GMRS,GMRS repeater input; pairs with channel 15\n467.5750,Channel 24,GMRS,GMRS repeater input; pairs with channel 16\n467.6000,Channel 25,GMRS,GMRS repeater input; pairs with channel 17\n467.6250,Channel 26,GMRS,GMRS repeater input; pairs with channel 18\n467.6500,Channel 27,GMRS,GMRS repeater input; pairs with channel 19\n467.6750,Channel 28,GMRS,GMRS repeater input; pairs with channel 20\n467.7000,Channel 29,GMRS,GMRS repeater input; pairs with channel 21\n467.7250,Channel 30,GMRS,GMRS repeater input; pairs with channel 22\n151.8200,MURS channel 1,MURS,\"2 W maximum, license-free VHF\"\n151.8800,MURS channel 2,MURS,\"2 W maximum, license-free VHF\"\n151.9400,MURS channel 3,MURS,\"2 W maximum, license-free VHF\"\n154.5700,MURS channel 4,MURS,\"2 W maximum, license-free VHF\"\n154.6000,MURS channel 5,MURS,\"2 W maximum, license-free VHF\"\n314-316,315 MHz remotes and tire sensors,Remote/sensor,\"US car key fobs, garage and gate remotes, and tire pressure (TPMS) sensors.\"\n317.5-318.5,318 MHz garage and gate remotes,Remote/sensor,Used by Linear and some other garage door and gate remotes.\n344.5-345.5,345 MHz alarm sensors,Remote/sensor,\"Door, window and motion sensors for Honeywell-style home alarm systems.\"\n389-391,390 MHz garage door openers,Remote/sensor,Many older US garage door openers use 390 MHz.\n300-348,\"Remotes and alarms, low band\",Remote/sensor,\"Older remotes, alarm sensors and car key fobs.\"\n433.05-434.79,ISM 433 MHz,IoT/ISM,\"Weather stations, doorbells, remotes, key fobs and tire sensors. 433.92 MHz is the most common spot.\"\n902-928,ISM 900 MHz,IoT/ISM,\"License-free band in the US: utility meters, 900 MHz cordless phones and baby monitors, RFID readers, garage and gate remotes, LoRa and Wi-Fi HaLow.\"\n902-928,LoRa and Meshtastic (US915),IoT/ISM,\"LoRa sensors, Helium hotspots and Meshtastic mesh radios.\"\n908.3-908.6,Z-Wave smart home (US),IoT/ISM,\"Smart home sensors, switches and locks. Z-Wave in the US centers on 908.42 MHz.\"\n863-870,EU/UK ISM 868 MHz,IoT/ISM,\"European sensors, alarms, remotes and LoRa.\"\n617-652,LTE Band 71 downlink (600 MHz),Cellular,T-Mobile towers transmitting to phones.\n663-698,LTE Band 71 uplink (600 MHz),Cellular,Phones transmitting to T-Mobile towers.\n699-716,LTE Band 12/17 uplink (700 MHz),Cellular,Phones transmitting to AT&T and T-Mobile towers.\n729-746,LTE Band 12/17 downlink (700 MHz),Cellular,AT&T and T-Mobile towers transmitting to phones.\n746-756,LTE Band 13 downlink (700 MHz),Cellular,Verizon towers transmitting to phones.\n777-787,LTE Band 13 uplink (700 MHz),Cellular,Phones transmitting to Verizon towers.\n758-768,FirstNet LTE Band 14 downlink,Cellular,\"FirstNet first-responder network, towers transmitting.\"\n788-798,FirstNet LTE Band 14 uplink,Cellular,\"FirstNet first-responder network, phones and devices transmitting.\"\n791-821,LTE800 (Band 20) downlink,Cellular,Europe only. Towers transmitting to phones. Not used in the US.\n832-862,LTE800 (Band 20) uplink,Cellular,Europe only. Flipper label: LTE800 UL. Phones transmitting to towers. In the US this range holds cellular 850 and trunked radio instead.\n824-849,\"Cellular 850 uplink (LTE Band 5, GSM850)\",Cellular,Phones transmitting to towers. Used by several US carriers.\n869-894,\"Cellular 850 downlink (LTE Band 5, GSM850)\",Cellular,Towers transmitting to phones. Used by several US carriers.\n880-915,GSM900 (Band 8) uplink,Cellular,\"Used in Europe, Asia, Africa and Australia. Flipper label: GSM900 UL. In the US, 880-894 is cellular tower downlink and 896-915 is business radio and ISM, so a signal here is not GSM900.\"\n925-960,GSM900 (Band 8) downlink,Cellular,\"Used in Europe, Asia, Africa and Australia. Towers transmitting to phones.\"\n150.8-174,\"VHF public safety, business and utilities\",Business/public safety,\"Police, fire, EMS, utilities, school buses and business radios. Many agencies use digital voice, which a plain receiver can't decode.\"\n450-470,UHF business and public safety,Business/public safety,\"Business radios, public safety and the FRS/GMRS channels share this part of the spectrum.\"\n769-775,700 MHz public safety voice (towers),Business/public safety,\"Police, fire and EMS radio systems. Base stations and repeaters transmit here.\"\n799-805,700 MHz public safety voice (radios),Business/public safety,\"Police, fire and EMS handhelds and vehicle radios transmit here.\"\n806-824,800 MHz trunked radio (radios transmit),Business/public safety,\"Police, fire, utilities and business radio systems. Radios transmit here.\"\n851-869,800 MHz trunked radio (towers transmit),Business/public safety,\"Police, fire, utilities and business radio systems. Base stations transmit here.\"\n896-901,900 MHz business radio (radios transmit),Business/public safety,\"Business and industrial two-way radio, often trunked.\"\n935-940,900 MHz business radio (towers transmit),Business/public safety,\"Business and industrial two-way radio, often trunked.\"\n901-902,Narrowband PCS,Pager,Paging and messaging services.\n929-932,US pagers (930 MHz),Pager,\"Hospital, fire department and other paging networks. Text only.\"\n144-148,Amateur 2 m,Amateur,\"Ham radio. Handhelds, repeaters and satellites. License needed to transmit.\"\n219-225,Amateur 1.25 m,Amateur,Ham radio. License needed to transmit.\n420-450,Amateur 70 cm,Amateur,Ham radio handhelds and repeaters. Shared with other services. License needed to transmit.\n902-928,Amateur 33 cm,Amateur,\"Ham radio, shared with the license-free ISM devices in the same range.\"\n108-118,Aviation navigation (VOR and ILS),Aviation,Beacons that guide aircraft. Not voice.\n118-137,Aviation voice (airband),Aviation,\"Air traffic control, towers and pilots. AM voice.\"\n225-400,Military aviation (UHF),Aviation,Military air traffic control and aircraft radio.\n156-162.025,Marine VHF,Marine,\"Boats, ships, harbors and the Coast Guard. Channel 16 at 156.8 MHz is for distress and calling.\"\n162.4-162.55,NOAA Weather Radio,Weather,Seven channels from 162.400 to 162.550 MHz with forecasts and alerts.\n400.15-406,Weather balloons (radiosondes),Weather,Balloons released by weather services carry small transmitters in this range.\n121.4-121.6,Aviation emergency frequency 121.5,Emergency,International aircraft distress and guard frequency.\n406-406.1,Emergency beacons (EPIRB/PLB),Emergency,\"Distress beacons for boats, aircraft and hikers. Reserved for emergencies.\"\n137-138,Satellite downlinks,Satellite,Weather and other satellites send data here. Some older weather satellites that used to send here have been retired.\n87.5-108,FM radio,Broadcast,Commercial and public FM radio stations.\n174-216,VHF TV channels 7-13,Broadcast,Over-the-air digital TV.\n470-608,UHF TV channels 14-36,Broadcast,Over-the-air digital TV.\n26.965-27.405,CB radio,Hobby,\"40 channels, AM and SSB voice. No license needed in the US.\"\n";
+  var CH = [], MURS = [], OTHER = [], ROWS = [];
+  var FLIP = [[300, 348], [387, 464], [779, 928]];
+  var CAT_ORDER = ["Remote/sensor", "IoT/ISM", "Cellular", "Business/public safety", "Pager", "Amateur", "Aviation", "Marine", "Weather", "Emergency", "Satellite", "Broadcast", "Hobby"];
+  var mode = "walkie";
+
+  var GROUPS = [
+    { id: "main", title: "Channels 1-7", power: "2 W FRS / 5 W GMRS", frs: true, gmrs: true, svc: "Shared by FRS and GMRS", pw: "2 W on FRS, 5 W on GMRS" },
+    { id: "narrow", title: "Channels 8-14", power: "0.5 W", frs: true, gmrs: true, svc: "Shared by FRS and GMRS", pw: "0.5 W on both, handhelds only" },
+    { id: "rep", title: "Channels 15-22", power: "2 W FRS / 50 W GMRS", frs: true, gmrs: true, svc: "Shared by FRS and GMRS (also GMRS repeater outputs)", pw: "2 W on FRS, up to 50 W on GMRS" },
+    { id: "in", title: "Channels 23-30 (GMRS repeater inputs)", power: "GMRS only", frs: false, gmrs: true, svc: "GMRS only, repeater inputs", pw: "Up to 50 W, GMRS license required" }
+  ];
+  var LIKELY = {
+    main: "Could be either. FRS and GMRS radios both use these channels.",
+    narrow: "Probably a basic FRS radio. These are 0.5 W handheld channels.",
+    rep: "Could be either. A very strong signal or a repeater points to GMRS.",
+    "in": "GMRS. These channels are only used to talk into GMRS repeaters."
+  };
+  function grpOf(id) { return GROUPS.filter(function (g) { return g.id === id; })[0]; }
+  function grpFor(n) { return n <= 7 ? "main" : n <= 14 ? "narrow" : n <= 22 ? "rep" : "in"; }
+  function mhz(hz) { return (hz / 1e6).toFixed(4); }
+  function sk(d) { return (d >= 0 ? "+" : "-") + (Math.abs(d) / 1000).toFixed(2) + " kHz"; }
+
+  var input = document.getElementById("freq");
+  var readas = document.getElementById("readas");
+  var result = document.getElementById("result");
+  var table = document.getElementById("table");
+  var bandsBox = document.getElementById("bands");
+  var qInput = document.getElementById("q");
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  /* ---------- the sheet: parsing and storage ---------- */
+  function parseCSV(text) {
+    var rows = [], row = [], cur = "", q = false, i, ch;
+    function flush() { if (row.some(function (c) { return c.trim() !== ""; })) rows.push(row); row = []; }
+    for (i = 0; i < text.length; i++) {
+      ch = text[i];
+      if (q) {
+        if (ch === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else { q = false; } }
+        else { cur += ch; }
+      } else if (ch === '"') { q = true; }
+      else if (ch === ",") { row.push(cur); cur = ""; }
+      else if (ch === "\n" || ch === "\r") {
+        if (ch === "\r" && text[i + 1] === "\n") i++;
+        row.push(cur); cur = ""; flush();
+      } else { cur += ch; }
+    }
+    row.push(cur); flush();
+    return rows;
+  }
+  function parseRange(t) {
+    var s = String(t).trim().replace(/\s*mhz$/i, "");
+    var m = s.match(/^([0-9]*\.?[0-9]+)\s*(?:-|to)\s*([0-9]*\.?[0-9]+)$/i);
+    var lo, hi;
+    if (m) { lo = parseFloat(m[1]); hi = parseFloat(m[2]); }
+    else if (/^[0-9]*\.?[0-9]+$/.test(s)) { lo = parseFloat(s); hi = lo; }
+    else return null;
+    if (!(lo > 0 && hi > 0)) return null;
+    return lo <= hi ? [lo, hi] : [hi, lo];
+  }
+  function rowsFromCSV(text) {
+    var rows = parseCSV(text), out = [], start = 0, i;
+    if (rows.length && /mhz/i.test(rows[0][0])) start = 1;
+    for (i = start; i < rows.length; i++) {
+      var r = rows[i], rg = parseRange(r[0] || "");
+      if (!rg) continue;
+      out.push({ lo: rg[0], hi: rg[1], name: (r[1] || "").trim(), type: (r[2] || "").trim(), note: (r[3] || "").trim() });
+    }
+    return out;
+  }
+  function csvCell(v) { v = String(v); return /[",\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
+  function toCSV() {
+    var lines = ["mhz,name,type,note"];
+    ROWS.forEach(function (r) {
+      lines.push([r.lo === r.hi ? r.lo : r.lo + "-" + r.hi, r.name, r.type, r.note].map(csvCell).join(","));
+    });
+    return lines.join("\n") + "\n";
+  }
+  function isMine(r) { return r.type === "Mine" || r.type === ""; }
+  function classify() {
+    CH = []; MURS = []; OTHER = [];
+    ROWS.forEach(function (r) {
+      var m = /^channel\s+(\d+)$/i.exec(r.name), k = /(\d+)\s*$/.exec(r.name);
+      if (m && r.lo === r.hi) {
+        var n = parseInt(m[1], 10);
+        CH.push({ n: n, hz: Math.round(r.lo * 1e6), grp: grpFor(n), note: r.note });
+      } else if (/^murs$/i.test(r.type) && r.lo === r.hi) {
+        MURS.push([k ? parseInt(k[1], 10) : MURS.length + 1, Math.round(r.lo * 1e6)]);
+      } else {
+        OTHER.push(r);
+      }
+    });
+    CH.sort(function (a, b) { return a.n - b.n; });
+  }
+  function loadRows() {
+    var v = null;
+    try { v = JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) {}
+    if (Array.isArray(v) && v.length) { ROWS = v; return; }
+    ROWS = rowsFromCSV(DEFAULT_CSV);
+    try {
+      var old = JSON.parse(localStorage.getItem("freq-sheet-v2") || "null");
+      if (Array.isArray(old)) old.forEach(function (r) {
+        if (r && !r.type && r.lo > 0) ROWS.push({ lo: r.lo, hi: r.hi, name: r.name || "", type: "Mine", note: r.note || "" });
+      });
+    } catch (e) {}
+  }
+  function saveRows() { try { localStorage.setItem(KEY, JSON.stringify(ROWS)); } catch (e) {} }
+
+  /* ---------- lookup helpers ---------- */
+  function parse(raw) {
+    var s = String(raw).replace(/,/g, ".").replace(/[^0-9.]/g, "");
+    var v = parseFloat(s);
+    if (!isFinite(v) || v <= 0) return null;
+    var hz, unit;
+    if (v >= 1e6) { hz = v; unit = "Hz"; }
+    else if (v >= 1e4) { hz = v * 1e3; unit = "kHz"; }
+    else { hz = v * 1e6; unit = "MHz"; }
+    return { hz: Math.round(hz), unit: unit };
+  }
+  function nearest(list, hz, get) {
+    var best = null, bd = Infinity;
+    list.forEach(function (c) { var d = Math.abs(hz - get(c)); if (d < bd) { bd = d; best = c; } });
+    return { item: best, dist: bd };
+  }
+  function rangeText(r) { return (r.lo === r.hi ? r.lo : r.lo + "-" + r.hi) + " MHz"; }
+  function distTo(r, m) { return m < r.lo ? r.lo - m : m > r.hi ? m - r.hi : 0; }
+  function matchesFor(hz) {
+    var m = hz / 1e6;
+    return OTHER.filter(function (r) {
+      var tol = r.lo === r.hi ? 0.00625 : 0;
+      return m >= r.lo - tol && m <= r.hi + tol;
+    }).sort(function (a, b) { return (a.hi - a.lo) - (b.hi - b.lo); });
+  }
+  function channelAt(hz) {
+    if (!CH.length) return null;
+    var n = nearest(CH, hz, function (c) { return c.hz; });
+    return n.dist <= 6250 ? n.item : null;
+  }
+  function tokens(q) {
+    return q.toLowerCase().replace(/\bul\b/g, "uplink").replace(/\bdl\b/g, "downlink")
+      .split(/[^a-z0-9.]+/).filter(function (w) { return w.length >= 3; });
+  }
+  function filterRows(rows, q) {
+    var t = tokens(q);
+    if (!t.length) return rows;
+    var max = 0;
+    var scored = rows.map(function (r) {
+      var h = (r.name + " " + r.type + " " + r.note).toLowerCase(), sc = 0;
+      t.forEach(function (w) { if (h.indexOf(w) >= 0) sc++; });
+      if (sc > max) max = sc;
+      return { r: r, sc: sc };
+    });
+    if (!max) return [];
+    return scored.filter(function (x) { return x.sc === max; }).map(function (x) { return x.r; });
+  }
+
+  /* ---------- result building blocks ---------- */
+  function facts(rows, monoFirst) {
+    var dl = el("dl", "facts");
+    rows.forEach(function (r, i) { dl.appendChild(el("dt", null, r[0])); dl.appendChild(el("dd", monoFirst && i === 0 ? "mono" : null, r[1])); });
+    return dl;
+  }
+  function verdict(numText, small, badgeCls, badgeText, title) {
+    var v = el("div", "verdict");
+    v.appendChild(el("div", "num" + (small ? " small" : ""), numText));
+    var t = el("div", "vtext");
+    t.appendChild(el("span", "badge " + badgeCls, badgeText));
+    t.appendChild(el("div", "vtitle", title));
+    v.appendChild(t);
+    return v;
+  }
+  function headRow(badgeCls, badgeText, title) {
+    var t = el("div", "vtext");
+    t.appendChild(el("span", "badge " + badgeCls, badgeText));
+    t.appendChild(el("div", "vtitle", title));
+    return t;
+  }
+  function typesRow(frs, gmrs) {
+    var d = el("div", "types");
+    d.appendChild(el("span", "tl", "Type"));
+    d.appendChild(el("span", "pill " + (frs ? "on" : "off"), "FRS"));
+    d.appendChild(el("span", "pill " + (gmrs ? "on" : "off"), "GMRS"));
+    d.appendChild(el("span", "tn", frs && gmrs ? "Shared by both" : gmrs ? "GMRS only" : "Neither"));
+    return d;
+  }
+  function entryRow(r, extra) {
+    var d = el("div", "entry");
+    var top = el("div", "entry-top");
+    top.appendChild(el("span", "entry-name", r.name || "Unnamed"));
+    if (r.type) top.appendChild(el("span", "tag", r.type));
+    d.appendChild(top);
+    d.appendChild(el("div", "entry-meta", rangeText(r) + (extra || "")));
+    if (r.note) d.appendChild(el("div", "entry-note", r.note));
+    return d;
+  }
+  function modeBtn(label, m) {
+    var b = el("button", "btn ghost", label);
+    b.type = "button";
+    b.style.alignSelf = "flex-start";
+    b.addEventListener("click", function () { setMode(m); });
+    return b;
+  }
+  function flipNote(p) {
+    var inFlip = FLIP.some(function (r) { return p.hz >= r[0] * 1e6 && p.hz <= r[1] * 1e6; });
+    if (!inFlip) {
+      result.appendChild(el("p", "note flip", "A Flipper Zero cannot receive " + mhz(p.hz) + " MHz. Its radio covers 300-348, 387-464 and 779-928 MHz. If this reading came from the Flipper, recheck it. A scanner or radio can hear this one."));
+    } else if (mode === "walkie" && p.hz >= 462000000 && p.hz <= 464000000) {
+      result.appendChild(el("p", "note flip", "A Flipper Zero can see activity here, but it cannot decode FM voice. Use it to find the frequency, then listen on a radio set to that channel."));
+    }
+  }
+
+  /* ---------- walkie-talkie mode ---------- */
+  function renderWalkie(p) {
+    var hit = null;
+    var n = CH.length ? nearest(CH, p.hz, function (c) { return c.hz; }) : { item: null, dist: Infinity };
+    var c = n.item, d = c ? p.hz - c.hz : 0, ad = n.dist;
+
+    if (ad <= 6250) {
+      hit = c.n;
+      var g = grpOf(c.grp);
+      var exact = ad <= 1500;
+      result.appendChild(verdict(String(c.n), false, exact ? "good" : "warn", exact ? "Exact match" : "Close match",
+        (c.grp === "in" ? "GMRS repeater input " : "Channel ") + c.n + (exact ? "" : ", off by " + sk(d))));
+      result.appendChild(typesRow(g.frs, g.gmrs));
+      result.appendChild(el("p", "note", "Likely: " + LIKELY[c.grp]));
+      var rows = [["Channel frequency", mhz(c.hz) + " MHz"], ["Service", g.svc], ["Power", c.note || g.pw]];
+      if (c.grp === "rep") rows.push(["Repeater input", mhz(c.hz + 5000000) + " MHz (channel " + (c.n + 8) + ")"]);
+      if (c.grp === "in") rows.push(["Repeater output", mhz(c.hz - 5000000) + " MHz (channel " + (c.n - 8) + ")"]);
+      result.appendChild(facts(rows));
+      if (c.grp === "in") result.appendChild(el("p", "note", "You heard a handheld or mobile transmitting into a GMRS repeater. The repeater's answer comes back on channel " + (c.n - 8) + "."));
+      else if (c.grp === "rep") result.appendChild(el("p", "note", "Anyone on this channel is either talking radio to radio or listening to a GMRS repeater."));
+      if (!exact) result.appendChild(el("p", "note", "A reading within a few kHz of a channel is normally that channel."));
+    } else {
+      var m = MURS.length ? nearest(MURS, p.hz, function (x) { return x[1]; }) : { item: null, dist: Infinity };
+      if (m.dist <= 6250) {
+        result.appendChild(verdict("M" + m.item[0], false, "warn", "Different service", "MURS channel " + m.item[0]));
+        result.appendChild(typesRow(false, false));
+        result.appendChild(facts([["Channel frequency", mhz(m.item[1]) + " MHz"], ["Service", "MURS, license-free VHF"], ["Power", "2 W maximum"]]));
+        result.appendChild(el("p", "note", "That is not FRS or GMRS. It is the MURS band."));
+      } else if (ad <= 25000) {
+        result.appendChild(verdict("?", false, "bad", "No match", "Nearest is channel " + c.n + ", " + sk(d) + " away"));
+        result.appendChild(typesRow(false, false));
+        result.appendChild(facts([["Nearest channel", mhz(c.hz) + " MHz"], ["Your reading", mhz(p.hz) + " MHz"]]));
+        result.appendChild(el("p", "note", "Channels sit 12.5 kHz apart, so this is too far off to call it a drift. Check the digits."));
+      } else {
+        var bd = matchesFor(p.hz).filter(function (r) { return !isMine(r); })[0] || null;
+        result.appendChild(verdict("--", true, "bad", "Not FRS or GMRS", bd ? bd.name : "No channel near " + mhz(p.hz) + " MHz"));
+        result.appendChild(typesRow(false, false));
+        result.appendChild(el("p", "note", (bd && bd.note ? bd.note + " " : "") + "FRS and GMRS use 462.5500 to 462.7250 MHz and 467.5500 to 467.7250 MHz."));
+        result.appendChild(modeBtn("See everything that uses this frequency", "other"));
+      }
+    }
+    matchesFor(p.hz).filter(isMine).forEach(function (r) {
+      result.appendChild(el("p", "note", "From your sheet: " + (r.name || "Unnamed") + (r.note ? ". " + r.note : "")));
+    });
+    flipNote(p);
+    mark(hit);
+  }
+  function mark(n) {
+    Array.prototype.forEach.call(table.querySelectorAll("button.row"), function (b) {
+      b.classList.toggle("hit", n !== null && Number(b.dataset.n) === n);
+    });
+  }
+
+  /* ---------- other-frequencies mode ---------- */
+  function renderOther(p) {
+    var m = p.hz / 1e6;
+    var ch = channelAt(p.hz);
+    if (ch) {
+      result.appendChild(el("p", "note hint", "This is a walkie-talkie channel: channel " + ch.n + "."));
+      result.appendChild(modeBtn("Show the channel details", "walkie"));
+    }
+    var ms = matchesFor(p.hz);
+    if (!ms.length) {
+      result.appendChild(headRow("bad", "No match", "Nothing in the sheet covers " + mhz(p.hz) + " MHz"));
+      var near = OTHER.filter(function (r) { return !isMine(r); }).map(function (r) { return { r: r, d: distTo(r, m) }; })
+        .sort(function (a, b) { return a.d - b.d; }).slice(0, 3);
+      if (near.length) {
+        result.appendChild(el("div", "also-h", "Closest entries"));
+        near.forEach(function (x) { result.appendChild(entryRow(x.r, ", " + x.d.toFixed(3) + " MHz away")); });
+      }
+      result.appendChild(el("p", "note", "Add it to the sheet below if you work out what it is."));
+    } else {
+      var top = ms[0];
+      result.appendChild(headRow("good", top.type || "Entry", top.name || "Unnamed"));
+      result.appendChild(facts([["Range", rangeText(top)], ["What uses it", top.note || "No note"]]));
+      if (/uplink/i.test(top.name)) result.appendChild(el("p", "note", "Uplink means a device transmitting toward a tower or base. A strong signal usually means a phone or radio is close to you."));
+      else if (/downlink/i.test(top.name)) result.appendChild(el("p", "note", "Downlink means a tower or base station transmitting. It is usually on all the time."));
+      if (ms.length > 1) {
+        result.appendChild(el("div", "also-h", "Also covers this frequency (" + (ms.length - 1) + ")"));
+        ms.slice(1).forEach(function (r) { result.appendChild(entryRow(r)); });
+      }
+    }
+    flipNote(p);
+  }
+
+  function render() {
+    var p = parse(input.value);
+    result.replaceChildren();
+    if (!p) {
+      readas.textContent = "";
+      result.appendChild(el("p", "note", "Enter a frequency such as 462.5625. You can also type 462562.5 (kHz) or 462562500 (Hz)."));
+      mark(null);
+      return;
+    }
+    readas.textContent = "Read as " + mhz(p.hz) + " MHz (typed as " + p.unit + ")";
+    if (mode === "walkie") renderWalkie(p); else { mark(null); renderOther(p); }
+  }
+
+  /* ---------- lists ---------- */
+  function buildTable() {
+    table.replaceChildren();
+    GROUPS.forEach(function (g) {
+      var cs = CH.filter(function (c) { return c.grp === g.id; });
+      if (!cs.length) return;
+      table.appendChild(el("div", "grp", g.title));
+      cs.forEach(function (c) {
+        var b = el("button", "row");
+        b.type = "button";
+        b.dataset.n = c.n;
+        b.dataset.f = mhz(c.hz);
+        b.appendChild(el("span", "c", String(c.n)));
+        b.appendChild(el("span", "f", mhz(c.hz)));
+        b.appendChild(el("span", "p", g.power));
+        b.addEventListener("click", function () {
+          input.value = b.dataset.f;
+          render();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+        table.appendChild(b);
+      });
+    });
+  }
+  function buildBands() {
+    bandsBox.replaceChildren();
+    var rows = OTHER.filter(function (r) { return !isMine(r); });
+    var q = qInput.value.trim();
+    if (q) rows = filterRows(rows, q);
+    if (!rows.length) { bandsBox.appendChild(el("div", "grp", "Nothing matches. Try a name like pager, garage, LTE800 or weather.")); return; }
+    var cats = [];
+    CAT_ORDER.forEach(function (c) { cats.push(c); });
+    rows.forEach(function (r) { if (cats.indexOf(r.type) < 0) cats.push(r.type); });
+    cats.forEach(function (cat) {
+      var rs = rows.filter(function (r) { return r.type === cat; }).sort(function (a, b) { return a.lo - b.lo; });
+      if (!rs.length) return;
+      bandsBox.appendChild(el("div", "grp", cat));
+      rs.forEach(function (r) {
+        var b = el("button", "row band");
+        b.type = "button";
+        b.appendChild(el("span", "bn", r.name));
+        b.appendChild(el("span", "p mono", rangeText(r)));
+        b.addEventListener("click", function () {
+          var mid = (r.lo + r.hi) / 2;
+          input.value = String(Math.round(mid * 10000) / 10000);
+          render();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+        bandsBox.appendChild(b);
+      });
+    });
+  }
+  var mineMsg = document.getElementById("mineMsg");
+  function renderMine() {
+    var list = document.getElementById("mineList");
+    list.replaceChildren();
+    var mine = OTHER.filter(isMine);
+    if (!mine.length) { list.appendChild(el("div", "grp", "Nothing added yet. Add a frequency above or import a CSV.")); return; }
+    mine.forEach(function (r) {
+      var wrap = el("div", "mine-item");
+      var b = el("button", "row band");
+      b.type = "button";
+      b.appendChild(el("span", "bn", r.name || "Unnamed"));
+      b.appendChild(el("span", "p mono", rangeText(r)));
+      b.addEventListener("click", function () { input.value = String(r.lo); render(); window.scrollTo({ top: 0, behavior: "smooth" }); });
+      var d = el("button", "btn ghost del", "Remove");
+      d.type = "button";
+      d.setAttribute("aria-label", "Remove " + (r.name || "entry"));
+      d.addEventListener("click", function () { ROWS.splice(ROWS.indexOf(r), 1); saveRows(); refresh(); });
+      wrap.appendChild(b);
+      wrap.appendChild(d);
+      list.appendChild(wrap);
+    });
+  }
+  function refresh() { classify(); buildTable(); buildBands(); renderMine(); render(); }
+
+  /* ---------- mode switch ---------- */
+  function setMode(m, keep) {
+    mode = m === "other" ? "other" : "walkie";
+    if (!keep) { try { localStorage.setItem(MODEKEY, mode); } catch (e) {} }
+    var w = mode === "walkie";
+    document.getElementById("modeW").setAttribute("aria-pressed", w ? "true" : "false");
+    document.getElementById("modeO").setAttribute("aria-pressed", w ? "false" : "true");
+    document.getElementById("secW").hidden = !w;
+    document.getElementById("secO").hidden = w;
+    document.getElementById("chipsW").hidden = !w;
+    document.getElementById("chipsO").hidden = w;
+    render();
+  }
+  document.getElementById("modeW").addEventListener("click", function () { setMode("walkie"); });
+  document.getElementById("modeO").addEventListener("click", function () { setMode("other"); });
+
+  Array.prototype.forEach.call(document.querySelectorAll("button.chip[data-f]"), function (b) {
+    b.addEventListener("click", function () { input.value = b.dataset.f; render(); });
+  });
+  input.addEventListener("input", render);
+  qInput.addEventListener("input", buildBands);
+
+  /* ---------- sheet controls ---------- */
+  var addF = document.getElementById("addF"), addN = document.getElementById("addN");
+  document.getElementById("addBtn").addEventListener("click", function () {
+    var rg = parseRange(addF.value);
+    if (!rg) { mineMsg.textContent = "Enter a frequency like 462.6125, or a range like 433.05-434.79."; return; }
+    ROWS.push({ lo: rg[0], hi: rg[1], name: addN.value.trim(), type: "Mine", note: "" });
+    saveRows(); refresh();
+    addF.value = ""; addN.value = "";
+    mineMsg.textContent = "Added.";
+  });
+  var imp = document.getElementById("impFile");
+  imp.addEventListener("change", function () {
+    var f = imp.files && imp.files[0];
+    if (!f) return;
+    var rd = new FileReader();
+    rd.onload = function () {
+      var rows = rowsFromCSV(String(rd.result));
+      if (!rows.length) { mineMsg.textContent = "No usable rows found. The first column needs a frequency in MHz."; imp.value = ""; return; }
+      ROWS = rows; saveRows(); refresh();
+      mineMsg.textContent = "Imported " + rows.length + " rows. The whole table was replaced.";
+      imp.value = "";
+    };
+    rd.onerror = function () { mineMsg.textContent = "Couldn't read that file."; };
+    rd.readAsText(f);
+  });
+  async function exportCSV() {
+    var text = toCSV();
+    try {
+      if (window.claude && window.claude.use) {
+        var dl = await window.claude.use("downloads");
+        if (dl) {
+          try { await dl.save({ filename: "frequency-sheet.csv", data: text }); mineMsg.textContent = "Saved."; }
+          catch (e) { mineMsg.textContent = e && e.code === "declined" ? "Save cancelled." : "Couldn't save the file."; }
+          return;
+        }
+      }
+    } catch (e) {}
+    var u = URL.createObjectURL(new Blob([text], { type: "text/csv" }));
+    var a = document.createElement("a");
+    a.href = u; a.download = "frequency-sheet.csv";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(u); }, 1000);
+  }
+  document.getElementById("expBtn").addEventListener("click", exportCSV);
+  document.getElementById("resetBtn").addEventListener("click", function () {
+    ROWS = rowsFromCSV(DEFAULT_CSV); saveRows(); refresh();
+    mineMsg.textContent = "Table reset to the built-in sheet.";
+  });
+
+  /* ---------- photo: viewer always, automatic reading only where Claude is available ---------- */
+  var shot = document.getElementById("shot");
+  var readBtn = document.getElementById("readBtn");
+  var stopBtn = document.getElementById("stopBtn");
+  var pOut = document.getElementById("photoOut");
+  var thumb = document.getElementById("thumb");
+  var poText = document.getElementById("poText");
+  var zoom = document.getElementById("zoom");
+  var zimg = document.getElementById("zimg");
+  var file = null, url = null, ctl = null, sampleFn = null;
+
+  var NO_AI = "Reading a photo automatically needs Claude, which this page can't call. Tap the photo to enlarge it, read the numbers off the screen and type them above. The second line on the Flipper screen has the frequency range at the cursor.";
+  var PHOTO_PROMPT = "This is a photo of a Flipper Zero's small orange LCD screen. It may be tilted, blurry, streaked with glare or cut off at the edge. Find any radio frequency shown on screen, for example in the Spectrum Analyzer, Frequency Analyzer, Read RAW or a saved signal, and any band label such as '462-463 FRS/GMRS US' or 'GSM900 UL'. Reply with only JSON in this shape: {\"readings\":[{\"mhz\":462.5625,\"where\":\"short note on where on the screen\"}],\"labels\":[\"band label text as shown\"],\"summary\":\"one short sentence on what the screen shows\",\"sure\":true}. mhz is a number in megahertz. If a range such as 888.2-91x is shown, give the lowest digits you can read as mhz and say in where that the rest is cut off. Put the main frequency first (the one at the peak or cursor, if shown). Set sure to false if any digit is hard to read. If no frequency is legible, use an empty readings array and say why in summary. Do not guess digits you cannot see.";
+
+  function photoMsg(code) {
+    if (code === "not_granted") return "Claude access was declined for this page, so photos can't be read. You can still type the frequency.";
+    if (code === "rate_limited") return "Too many reads in a short time. Try again in a minute.";
+    if (code === "image_rejected") return "That file couldn't be used. Try a JPEG or PNG photo.";
+    if (code === "refused") return "That photo couldn't be read. Try a different one.";
+    return "Couldn't read the photo. Try a sharper, closer shot of the screen.";
+  }
+  function openZoom() { if (!url) return; zimg.src = url; zoom.hidden = false; }
+  function closeZoom() { zoom.hidden = true; }
+  document.getElementById("thumbBtn").addEventListener("click", openZoom);
+  document.getElementById("zoomClose").addEventListener("click", closeZoom);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !zoom.hidden) closeZoom(); });
+
+  shot.addEventListener("change", function () {
+    file = shot.files && shot.files[0] ? shot.files[0] : null;
+    if (url) { URL.revokeObjectURL(url); url = null; }
+    if (!file) { pOut.hidden = true; readBtn.disabled = true; return; }
+    url = URL.createObjectURL(file);
+    thumb.src = url;
+    pOut.hidden = false;
+    poText.replaceChildren(el("p", null, sampleFn ? "Ready. Tap Read it." : NO_AI));
+    readBtn.disabled = false;
+  });
+  stopBtn.addEventListener("click", function () { if (ctl) ctl.abort(); });
+
+  function showLabels(labels) {
+    if (!labels || !labels.length) return;
+    var row = el("div", "chips");
+    row.style.marginTop = "0";
+    row.appendChild(el("span", "t", "Screen label"));
+    labels.forEach(function (lb) {
+      var b = el("button", "chip", String(lb));
+      b.type = "button";
+      b.addEventListener("click", function () {
+        if (/frs|gmrs/i.test(lb)) { setMode("walkie"); return; }
+        qInput.value = String(lb);
+        setMode("other");
+        buildBands();
+        document.getElementById("secO").scrollIntoView({ behavior: "smooth" });
+      });
+      row.appendChild(b);
+    });
+    poText.appendChild(row);
+  }
+
+  readBtn.addEventListener("click", async function () {
+    if (!file || !sampleFn) return;
+    ctl = new AbortController();
+    readBtn.disabled = true;
+    stopBtn.hidden = false;
+    poText.replaceChildren(el("p", null, "Reading the photo..."));
+    try {
+      var data = await sampleFn.json(PHOTO_PROMPT, { images: file, signal: ctl.signal });
+      var list = (data && Array.isArray(data.readings) ? data.readings : []).filter(function (r) {
+        var n = Number(r && r.mhz);
+        return isFinite(n) && n > 0;
+      });
+      poText.replaceChildren();
+      if (data && data.summary) poText.appendChild(el("p", null, String(data.summary)));
+      if (!list.length) {
+        poText.appendChild(el("p", null, "No frequency found. Type it in the box above."));
+      } else {
+        var chips = el("div", "chips");
+        chips.style.marginTop = "0";
+        chips.appendChild(el("span", "t", "Read"));
+        list.forEach(function (r) {
+          var b = el("button", "chip", String(Number(r.mhz)));
+          b.type = "button";
+          if (r.where) b.title = String(r.where);
+          b.addEventListener("click", function () { input.value = String(Number(r.mhz)); render(); });
+          chips.appendChild(b);
+        });
+        poText.appendChild(chips);
+        input.value = String(Number(list[0].mhz));
+        render();
+        if (list[0].where) poText.appendChild(el("p", null, "Where: " + String(list[0].where)));
+        if (data.sure === false) poText.appendChild(el("p", null, "Some digits were hard to read. Check them against your screen and fix the box above if needed."));
+      }
+      showLabels(data && Array.isArray(data.labels) ? data.labels.map(String) : []);
+    } catch (e) {
+      if (e && e.code === "cancelled") poText.replaceChildren(el("p", null, "Stopped."));
+      else poText.replaceChildren(el("p", null, photoMsg(e && e.code)));
+    } finally {
+      readBtn.disabled = false;
+      stopBtn.hidden = true;
+      ctl = null;
+    }
+  });
+
+  async function initAI() {
+    if (!window.claude || !window.claude.use) return;
+    try {
+      var s = await window.claude.use("sample");
+      if (!s) return;
+      var caps = await s.limits();
+      if (!caps || !caps.images) return;
+      sampleFn = s;
+      shot.accept = caps.images.mediaTypes.join(",");
+      readBtn.hidden = false;
+      if (file) poText.replaceChildren(el("p", null, "Ready. Tap Read it."));
+    } catch (e) {}
+  }
+
+  /* ---------- start ---------- */
+  loadRows();
+  var savedMode = "walkie";
+  try { savedMode = localStorage.getItem(MODEKEY) || "walkie"; } catch (e) {}
+  classify(); buildTable(); buildBands(); renderMine();
+  setMode(savedMode, true);
+  initAI();
+})();
+</script>
+<script>
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js").catch(function () {});
+  });
+}
+</script>
+</body>
+</html>
